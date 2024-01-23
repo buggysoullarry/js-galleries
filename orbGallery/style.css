@@ -1,0 +1,183 @@
+body {
+  background-color: #222222;
+  color: #ffffff;
+  background: url("images/background.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* Default text */
+
+:root {
+  /* Animation duration needs to be the same for gallery and images */
+  --animation-duration: 15s;
+  font-family: "montserrat", sans-serif;
+}
+.container {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/*inner orb cover*/
+.gallery_container:before {
+  width: 100%;
+  aspect-ratio: 1/ 1;
+  content: "";
+  position: absolute;
+  box-shadow: inset 0 0 0 30vh rgba(255, 255, 255, 0.8);
+
+  filter: blur(10px);
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  background: inherit;
+}
+.gallery_container {
+  position: relative;
+  min-width: 300px;
+  width: 30vw;
+  margin: 30px 0;
+  aspect-ratio: 1/ 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  position: relative;
+  font-size: 2.5vw;
+  font-weight: bolder;
+  font-family: "Montserrat", sans-serif;
+}
+
+.gallery {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/ 1;
+  /* Animation for gallery spin */
+  animation: gallery-spin var(--animation-duration) infinite linear;
+}
+.gallery_container:hover .gallery {
+  animation-play-state: paused;
+}
+
+/* orb inner dots */
+
+.gallery_container .dot1,
+.gallery_container .dot2 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  /* Animation for dots spin */
+  animation: dots-spin infinite alternate;
+  filter: blur(2vw);
+  filter: blur(15px);
+}
+
+.gallery_container .dot1 {
+  top: 70%; /* change this to adjust size and position of dots */
+  left: 35%;
+  width: 45%;
+  aspect-ratio: 1/ 1;
+  background-image: radial-gradient(circle at 0 0, #add653, #b52222);
+  animation-duration: 8s;
+}
+.gallery_container .dot2 {
+  top: 30%;
+  left: 60%;
+  width: 50%;
+  aspect-ratio: 1/ 1;
+  background-image: radial-gradient(circle at 0 0, #06508a, #f7c6c6);
+  animation-duration: 6s;
+}
+
+.gallery_img {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  z-index: 3;
+  aspect-ratio: 1/ 1;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  border-radius: 45%;
+  animation: image-spin var(--animation-duration) infinite linear;
+}
+.gallery_img.active {
+  z-index: 4;
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 93%);
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 90%);
+}
+.text_container .heading {
+  font-size: 1.6vw;
+  font-weight: bolder;
+}
+.text_container p {
+  font-size: 1.2vw;
+  margin-top: 0.1rem;
+}
+.text_container {
+  display: none;
+  text-align: center;
+  padding: 0.3rem;
+  width: 80%;
+  background: radial-gradient(circle, rgba(76, 105, 135, 1) 5%, rgba(0, 0, 0, 0) 80%);
+  border-radius: 13%;
+  position: absolute;
+  bottom: 10%;
+}
+
+.gallery_img.active .text_container {
+  display: block;
+  animation: fadeIn 1500ms;
+}
+
+.gallery_container:hover .gallery_img {
+  animation-play-state: paused;
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes gallery-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes image-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes dots-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
