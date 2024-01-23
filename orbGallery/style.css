@@ -128,7 +128,6 @@ body {
   margin-top: 0.1rem;
 }
 .text_container {
-  display: none;
   text-align: center;
   padding: 0.3rem;
   width: 80%;
@@ -136,26 +135,16 @@ body {
   border-radius: 13%;
   position: absolute;
   bottom: 10%;
+  opacity: 0;
 }
 
 .gallery_img.active .text_container {
-  display: block;
-  animation: fadeIn 1500ms;
+  opacity: 1;
+  transition: all 1s linear;
 }
 
 .gallery_container:hover .gallery_img {
   animation-play-state: paused;
-}
-
-/* Animations */
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 @keyframes gallery-spin {
