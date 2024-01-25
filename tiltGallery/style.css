@@ -1,0 +1,178 @@
+/* Define root colors for consistent theming */
+:root {
+  --gradient-top: linear-gradient(0deg, #5b5f97ff, #cdc392ff, #cc5a71ff, #a3cef1ff, #ffbc42ff);
+  --ultra-violet: #5b5f97ff;
+  --sage: #cdc392ff;
+  --sageoff: #cdc39200; /* Transparent version of sage */
+  --blush: #cc5a71ff;
+  --uranian-blue: #a3cef1ff;
+  --uranian-blueoff: #a3cef100; /* Transparent version of uranian-blue */
+  --xanthous: #ffbc42ff;
+}
+
+/* Basic body styling with Montserrat font and a gradient background */
+body {
+  font-family: "Montserrat", sans-serif;
+  background-image: var(--gradient-top);
+  color: white;
+}
+
+/* Header styling */
+h1 {
+  color: var(--blush);
+}
+
+/* Flex container for centering content */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 100px;
+}
+
+/* Styling for side gradients on container */
+.tilt-gradients {
+  position: relative; /* Ensure the absolute positioned pseudo-elements are placed relative to this container */
+}
+
+.tilt-gradients::before,
+.tilt-gradients::after {
+  background: linear-gradient(to right, var(--sage) 0%, var(--sageoff) 100%);
+  content: "";
+  height: 280px;
+  position: absolute;
+  width: 80px;
+  z-index: 1;
+}
+
+.tilt-gradients::before {
+  left: 0;
+  top: 0;
+}
+
+.tilt-gradients::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg); /* Rotating to mirror the gradient on the other side */
+}
+
+/* Container for gallery items */
+.tilt-gallery-container {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 280px; /* Smaller than tilt-gallery height to cover tilting corners */
+  border-radius: 15px;
+
+  /* Pause animation on hover */
+  &:hover .tilt-gallery {
+    animation-play-state: paused;
+  }
+}
+
+/* Gallery styling with horizontal scroll animation */
+.tilt-gallery {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 300px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  padding: 0;
+  margin: -10px -10px; /* Hides tilting corners */
+  overflow: hidden;
+  white-space: nowrap;
+  animation: tilt-scroll 25.5s linear infinite; /* Adjustable scroll speed */
+}
+
+/* Keyframes for scrolling animation */
+@keyframes tilt-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Keyframes for reverse scrolling animation */
+@keyframes tilt-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Lightbox close button styling */
+.lb-close {
+  width: 15px;
+  height: 15px;
+  background-size: cover;
+}
+
+/* Individual gallery item styling */
+.tilt-gallery-item {
+  float: left;
+  list-style: none;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  border: var(--xanthous) solid 2px;
+  transform: rotate(-5deg); /* Slight rotation for visual effect */
+}
+
+/* Centering and sizing gallery item images */
+.tilt-gallery-item img {
+  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Overlay styling for gallery items */
+.tilt-gallery-item .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to top, var(--uranian-blue) 0%, var(--uranian-blueoff) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Icon styling inside gallery items */
+.tilt-gallery-item .icon {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 32px;
+  width: 32px;
+  transform: translate(-50%, -50%);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%23a3cef1" viewBox="0 0 16 16">    <path fill-rule="evenodd"        d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0" />    <path        d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z" />    <path fill-rule="evenodd"        d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5" /></svg>');
+  background-size: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Hover effects for overlay and icon */
+.tilt-gallery-item:hover .overlay {
+  opacity: 0.3;
+}
+
+.tilt-gallery-item:hover .icon {
+  opacity: 0.8;
+}
