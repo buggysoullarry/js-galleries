@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //set the width of the container
   var container = document.getElementsByClassName("tilt-gallery-container")[0];
-  container.style.maxWidth = (count / 2) * 200 + "px";
+  if (container) container.style.maxWidth = (count / 2) * 200 + "px";
 
   // setup some common lightbox options
   lightbox.option({
