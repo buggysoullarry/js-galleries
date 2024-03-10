@@ -1,0 +1,142 @@
+
+
+.fuzzy-bubbles-regular {
+  font-family: "Fuzzy Bubbles", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.fuzzy-bubbles-bold {
+  font-family: "Fuzzy Bubbles", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  background-color: #010409;
+  background-image: url('images/bg.jpg');
+  
+  background-size: cover;
+  background-position: bottom;
+
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  height: 100%;
+}
+
+.gallery {
+  position: relative;
+  display: flex;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+
+  transform-origin: bottom left;
+}
+
+.gallery_item {
+  position: absolute;
+  transform-origin: bottom center;
+  aspect-ratio: 1/1;
+
+  height: 300px;
+  border: #fff 4px solid;
+  border-radius: 0.5em;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.gallery_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery_item.animatedup {
+  animation: slideup 1s 1;
+}
+.gallery_item.animatedout {
+  animation: slideout 1s 1;
+}
+
+
+@keyframes slideup {
+  0% {
+    transform: translateX(0) rotate(var(--rotation));
+    z-index: -1;
+  }
+  50% {
+    transform: translateX(350px) translateY(-50px) rotate(0);
+    z-index: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(var(--rotation));
+  }
+}
+
+@keyframes slideout {
+  0% {
+    transform: translateX(0) rotate(var(--rotation));
+    z-index: 1;
+  }
+  50% {
+    transform: translateX(350px) translateY(-50px) rotate(0);
+    z-index: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(var(--rotation));
+  }
+}
+
+.gallery_item::after {
+  text-align: center;
+  position: absolute;
+
+  background-color: #fff;
+  width: 100%;
+  height: 20%;
+  bottom: -2%;
+  left: -4;
+
+  border: #fff 4px solid;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  padding-top: 5px;
+  content: attr(data-title);
+  box-shadow: rgba(0, 0, 0, 0.02) 1px 0px 0px 0px;
+}
+
+
+
+.controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  padding-left: 200px;
+}
+.next {
+  background: none;
+  border: none;
+  color: #fff;
+}
+.prev {
+  background: none;
+  border: none;
+  color: #fff;
+}
+.btn:hover {
+  background: none;
+  border: none;
+  color: #777373;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
